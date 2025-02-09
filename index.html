@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BillBuddies</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <style>
+      /* Reset and base styles */
+      
+    </style> -->
+  </head>
+  <body>
+    <button id="theme-toggle" class="theme-toggle">
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+
+    <div class="container">
+      <div class="header-container">
+        <div class="title-group">
+          <h1>Bill Buddies</h1>
+          <h2>- Splitting Bills with Your Best Buddies</h2>
+        </div>
+      </div>
+
+      <!-- Group Creation Section -->
+      <div id="group-section" class="section">
+        <h2>Create a Group</h2>
+        <label for="group-title">Group Title:</label>
+        <input type="text" id="group-title" placeholder="Enter group title" />
+
+        <div class="members-section">
+          <label>Group Members:</label>
+          <div class="member-input-group">
+            <input
+              type="text"
+              id="member-input"
+              placeholder="Enter member name"
+              class="member-input"
+            />
+            <button id="add-member-btn" class="action-button">
+              Add Member
+            </button>
+          </div>
+
+          <div id="members-list" class="members-list">
+            <!-- Members will be listed here -->
+          </div>
+        </div>
+
+        <button id="create-group-btn">Create Group</button>
+      </div>
+
+      <!-- Expense Addition Section -->
+      <div id="expense-section" class="section hidden">
+        <div class="group-info">
+          <div class="group-title-container">
+            <h2 class="group-title" id="group-title-display"></h2>
+            <button
+              id="edit-group-btn"
+              class="icon-button"
+              title="Edit Group Members"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div class="group-members" id="group-members-display">
+            <!-- Member chips will be generated here -->
+          </div>
+        </div>
+
+        <div id="members-management" class="members-management hidden">
+          <div class="management-header">
+            <h3>Group Members</h3>
+            <button class="close-btn" onclick="toggleMembersManagement(false)">
+              ×
+            </button>
+          </div>
+          <div class="member-input-group">
+            <input
+              type="text"
+              id="expense-member-input"
+              placeholder="Add new member"
+              class="member-input"
+            />
+            <button id="expense-add-member-btn" class="action-button">
+              Add Member
+            </button>
+          </div>
+          <div id="expense-members-list" class="members-list">
+            <!-- Members will be listed here -->
+          </div>
+        </div>
+
+        <h2 class="expense-header">Add Expense</h2>
+
+        <label for="expense-paid-by">Paid By:</label>
+        <select id="expense-paid-by"></select>
+
+        <label for="expense-amount">Amount:</label>
+        <input
+          type="number"
+          id="expense-amount"
+          placeholder="Enter amount"
+          step="0.01"
+        />
+
+        <label for="expense-description">Description (optional):</label>
+        <input
+          type="text"
+          id="expense-description"
+          placeholder="Expense description"
+        />
+
+        <label>Participants:</label>
+        <div id="participants-checkboxes" class="checkbox-group">
+          <!-- Checkboxes will be generated here -->
+        </div>
+        <button id="add-expense-btn">Add Expense</button>
+
+        <div class="view-tabs">
+          <button class="tab-button active" onclick="switchView('expense')">
+            Expense
+          </button>
+          <button class="tab-button" onclick="switchView('lending')">
+            Lending / Borrowing
+          </button>
+        </div>
+
+        <div id="expense-view" class="view-content">
+          <!-- Existing expense list content -->
+          <div id="expenses-list"></div>
+        </div>
+
+        <div id="lending-view" class="view-content hidden">
+          <div id="lending-list"></div>
+        </div>
+
+        <div class="total-expense">
+          <div>Total Group Expense</div>
+          <div class="amount" id="total-expense-amount">₹0.00</div>
+        </div>
+
+        <button id="calculate-settlement-btn">Calculate Settlement</button>
+
+        <h3>Settlement Transactions</h3>
+        <div id="settlements-list">
+          <!-- Settlement transactions will appear here -->
+        </div>
+
+        <button
+          id="print-settlements-btn"
+          class="print-button"
+          onclick="printSettlements()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M6 9V2h12v7"></path>
+            <path
+              d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"
+            ></path>
+            <path d="M6 14h12v8H6z"></path>
+          </svg>
+          Print Settlement Summary
+        </button>
+
+        <div id="print-content">
+          <div id="settlement-details"></div>
+        </div>
+        <button id="copy-link-btn" class="copy-link-btn">Share Link</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
