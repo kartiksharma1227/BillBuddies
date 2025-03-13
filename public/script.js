@@ -53,7 +53,7 @@ let groupTitle = "";
 
       // Add these variables at the top
       let tripId = null;
-      const API_URL = 'https://billbuddies.onrender.com/api';
+      const API_URL = 'https://billbuddies-backend.onrender.com/api';
 
       // Event listener to create group
       createGroupBtn.addEventListener("click", async () => {
