@@ -28,7 +28,7 @@ It allows users to add members (with QR codes), record expenses (with receipts),
 
 **Frontend**
 
-- HTML5, CSS3, JavaScript (ES6+)
+- HTML, CSS, JavaScript  
 - Responsive design with modern UI/UX
 
 ---
@@ -112,9 +112,7 @@ It allows users to add members (with QR codes), record expenses (with receipts),
 
 ---
 
-## 📜 License
-
-This project is licensed under the **MIT License**.
+ 
 
 ---
 

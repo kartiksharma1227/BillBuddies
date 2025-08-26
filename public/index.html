@@ -5,12 +5,9 @@
     <title>BillBuddies</title>
     <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <style>
-      /* Reset and base styles */
-      
-    </style> -->
   </head>
   <body>
+    <!-- Theme Toggle -->
     <button id="theme-toggle" class="theme-toggle">
       <svg
         class="sun-icon"
@@ -60,15 +57,32 @@
         <label for="group-title">Group Title:</label>
         <input type="text" id="group-title" placeholder="Enter group title" />
 
+      
         <div class="members-section">
           <label>Group Members:</label>
           <div class="member-input-group">
             <input
               type="text"
-              id="member-input"
+              id="member-name-input"
               placeholder="Enter member name"
               class="member-input"
             />
+            <input
+              type="email"
+              id="member-email-input"
+              placeholder="Enter member email"
+              class="member-input"
+            />
+
+            <!-- <input type="file" id="member-qr-input" accept="image/*" />
+              -->
+            <label class="custom-file-upload">
+  Upload QR
+  <input type="file" id="member-qr-input" name="qrCode" hidden />
+</label>
+<span id="file-name"> </span>
+
+
             <button id="add-member-btn" class="action-button">
               Add Member
             </button>
@@ -92,26 +106,13 @@
               class="icon-button"
               title="Edit Group Members"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
-                ></path>
-              </svg>
+              ✎
             </button>
           </div>
-          <div class="group-members" id="group-members-display">
-            <!-- Member chips will be generated here -->
-          </div>
+          <div class="group-members" id="group-members-display"></div>
         </div>
 
+        <!-- Member Management -->
         <div id="members-management" class="members-management hidden">
           <div class="management-header">
             <h3>Group Members</h3>
@@ -130,11 +131,10 @@
               Add Member
             </button>
           </div>
-          <div id="expense-members-list" class="members-list">
-            <!-- Members will be listed here -->
-          </div>
+          <div id="expense-members-list" class="members-list"></div>
         </div>
 
+        <!-- Expense Form -->
         <h2 class="expense-header">Add Expense</h2>
 
         <label for="expense-paid-by">Paid By:</label>
@@ -155,12 +155,52 @@
           placeholder="Expense description"
         />
 
-        <label>Participants:</label>
-        <div id="participants-checkboxes" class="checkbox-group">
-          <!-- Checkboxes will be generated here -->
+        <label for="expense-category">Category:</label>
+        <select id="expense-category">
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Bills">Bills</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="expense-added-by">Added By:</label>
+        <select id="expense-added-by"></select>
+
+        <label for="expense-receipt">Upload Receipt:</label>
+        <div class="file-upload-wrapper">
+          <input
+            type="file"
+            id="expense-receipt"
+            accept="image/*,.pdf"
+            class="file-input"
+          />
+          <label for="expense-receipt" class="file-upload-button">
+            <svg
+              class="upload-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17,8 12,3 7,8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span class="file-text">Choose File</span>
+          </label>
+          <span class="file-name" id="file-name-display">No file chosen</span>
         </div>
+
+        <label>Participants:</label>
+        <div id="participants-checkboxes" class="checkbox-group"></div>
+
         <button id="add-expense-btn">Add Expense</button>
 
+        <!-- View Tabs -->
         <div class="view-tabs">
           <button class="tab-button active" onclick="switchView('expense')">
             Expense
@@ -168,15 +208,30 @@
           <button class="tab-button" onclick="switchView('lending')">
             Lending / Borrowing
           </button>
+          <button class="tab-button" onclick="switchView('analytics')">
+            Analytics
+          </button>
         </div>
 
+        <!-- Expense View -->
         <div id="expense-view" class="view-content">
-          <!-- Existing expense list content -->
           <div id="expenses-list"></div>
         </div>
 
+        <!-- Lending View -->
         <div id="lending-view" class="view-content hidden">
           <div id="lending-list"></div>
+        </div>
+
+        <!-- Analytics View -->
+        <div id="analytics-section" class="section hidden">
+          <h2>Expense Analytics</h2>
+          <div style="margin: 20px 0">
+            <canvas id="memberChart"></canvas>
+          </div>
+          <div style="margin: 20px 0">
+            <canvas id="categoryChart"></canvas>
+          </div>
         </div>
 
         <div class="total-expense">
@@ -187,30 +242,13 @@
         <button id="calculate-settlement-btn">Calculate Settlement</button>
 
         <h3>Settlement Transactions</h3>
-        <div id="settlements-list">
-          <!-- Settlement transactions will appear here -->
-        </div>
+        <div id="settlements-list"></div>
 
         <button
           id="print-settlements-btn"
           class="print-button"
           onclick="printSettlements()"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M6 9V2h12v7"></path>
-            <path
-              d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"
-            ></path>
-            <path d="M6 14h12v8H6z"></path>
-          </svg>
           Print Settlement Summary
         </button>
 
@@ -221,6 +259,8 @@
       </div>
     </div>
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

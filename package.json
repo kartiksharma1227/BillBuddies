@@ -4,18 +4,22 @@
   "description": "Expense splitting app",
   "main": "app.js",
   "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "cloudinary": "^2.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "mongoose": "^6.0.12",
-    "uuid": "^8.3.2",
-    "path": "^0.12.7"
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.5",
+    "path": "^0.12.7",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.22"
   }
-} 
+}
