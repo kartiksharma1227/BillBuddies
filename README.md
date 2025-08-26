@@ -7,32 +7,35 @@ It allows users to add members (with QR codes), record expenses (with receipts),
 
 ## 🚀 Features
 
-- 👥 **Group Trip Management** – Create trips with members (name, email, QR code).  
-- 💰 **Expense Tracking** – Add expenses with participants, categories, receipts, and timestamps.  
-- ⚖️ **Settlement Calculation** – Optimized **Minimum Cash Flow Algorithm** reduces total number of transactions by up to 60%.  
-- 📎 **Proof Upload & Approval** – Debtors upload payment proofs, payees approve via dedicated approval links.  
-- 📩 **Automated Notifications** – Email reminders, proof received alerts, and payment confirmations (via Nodemailer).  
-- 📊 **Analytics Dashboard** – Category breakdown, member spending insights, and printable settlement reports.  
-- ☁️ **Secure File Handling** – Receipts, proofs, and QR codes stored safely in **Cloudinary**.  
+- 👥 **Group Trip Management** – Create trips with members (name, email, QR code).
+- 💰 **Expense Tracking** – Add expenses with participants, categories, receipts, and timestamps.
+- ⚖️ **Settlement Calculation** – Optimized **Minimum Cash Flow Algorithm** reduces total number of transactions by up to 60%.
+- 📎 **Proof Upload & Approval** – Debtors upload payment proofs, payees approve via dedicated approval links.
+- 📩 **Automated Notifications** – Email reminders, proof received alerts, and payment confirmations (via Nodemailer).
+- 📊 **Analytics Dashboard** – Category breakdown, member spending insights, and printable settlement reports.
+- ☁️ **Secure File Handling** – Receipts, proofs, and QR codes stored safely in **Cloudinary**.
 
 ---
 
 ## 🛠️ Tech Stack
 
 **Backend**
-- Node.js, Express.js  
-- MongoDB + Mongoose  
-- Cloudinary (file uploads)  
-- Nodemailer (email notifications)  
 
- 
+- Node.js, Express.js
+- MongoDB + Mongoose
+- Cloudinary (file uploads)
+- Nodemailer (email notifications)
+
+**Frontend**
+
+- HTML5, CSS3, JavaScript (ES6+)
+- Responsive design with modern UI/UX
 
 ---
 
 ## 📂 Project Structure
 
 ```
-
 ├── config/
 │   ├── cloudinary.js       # Cloudinary setup
 │   └── database.js         # MongoDB connection
@@ -51,18 +54,18 @@ It allows users to add members (with QR codes), record expenses (with receipts),
 ├── uploads/                # Temporary uploads (multer)
 ├── app.js                  # Server entry point
 └── .env                    # Environment variables
-
-````
+```
 
 ---
 
 ## ⚙️ Setup & Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/kartiksharma1227/BillBuddies.git
-   cd billbuddies
-````
+   cd BillBuddies
+   ```
 
 2. **Install dependencies**
 
@@ -116,5 +119,3 @@ This project is licensed under the **MIT License**.
 ---
 
 💚 Built with passion to make group trips simpler – one bill at a time!
-
- 
